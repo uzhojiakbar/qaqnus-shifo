@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Quicksand:wght@300..700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Quicksand, sans-serif;
+}
+
+:root {
+  --main-color: #2490eb;
+}
+
+.main {
+  width: 100vw;
+  min-width: 320px;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-right: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2490eb;
+  border-radius: 50px;
+  /* text-transform: ; */
+  margin-right: 2px;
+}
