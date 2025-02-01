@@ -13,7 +13,7 @@ const Nav = styled(motion.div)`
   align-items: center;
   padding: 20px;
   height: 10vh;
-  background-color: white;
+  background-color: var(--bg-color);
   color: #000;
   user-select: none;
 
@@ -64,6 +64,14 @@ const BurgerIcon = styled(MenuOutlined)`
 
   @media (max-width: 768px) {
     display: block;
+  }
+`;
+
+const ManuItem = styled(Menu.Item)`
+  &.ant-menu-item-selected {
+    background-color: var(--main-color) !important;
+    font-weight: bold;
+    color: var(--main-color) !important;
   }
 `;
 
@@ -128,26 +136,30 @@ const Navbar = () => {
         title="Menu"
         placement="right"
         onClose={closeDrawer}
-        visible={visible}
-        style={{ width: "100%" }}
+        open={visible}
+        style={{ width: "100%", background: "var(--bg-color)" }}
       >
         <Menu
-          style={{ border: "none", width: "100%" }}
+          style={{
+            border: "none",
+            width: "100%",
+            background: "var(--bg-color)",
+          }}
           onClick={closeDrawer}
           selectedKeys={[location.pathname]}
         >
-          <Menu.Item key="/" onClick={() => nav("/")}>
+          <ManuItem key="/" onClick={() => nav("/")}>
             Home
-          </Menu.Item>
-          <Menu.Item key="/pages" onClick={() => nav("/pages")}>
+          </ManuItem>
+          <ManuItem key="/pages" onClick={() => nav("/pages")}>
             Pages
-          </Menu.Item>
-          <Menu.Item key="/services" onClick={() => nav("/services")}>
+          </ManuItem>
+          <ManuItem key="/services" onClick={() => nav("/services")}>
             Services
-          </Menu.Item>
-          <Menu.Item key="/contact" onClick={() => nav("/contact")}>
+          </ManuItem>
+          <ManuItem key="/contact" onClick={() => nav("/contact")}>
             Contact Us
-          </Menu.Item>
+          </ManuItem>
         </Menu>
       </Drawer>
     </Nav>

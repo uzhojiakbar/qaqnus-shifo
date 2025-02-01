@@ -5,10 +5,18 @@
   margin: 0;
   box-sizing: border-box;
   font-family: Quicksand, sans-serif;
+
+  color: white;
 }
 
 :root {
-  --main-color: #2490eb;
+  --main-color: #77704c;
+  --bg-color: rgba(32, 32, 32);
+  --white: white;
+}
+
+body {
+  background-color: var(--bg-color);
 }
 
 .main {
@@ -29,7 +37,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2490eb;
+  background: var(--main-color);
   border-radius: 50px;
   /* text-transform: ; */
   margin-right: 2px;

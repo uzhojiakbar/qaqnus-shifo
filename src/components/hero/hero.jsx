@@ -13,7 +13,15 @@ const HeroContainer = styled.div`
   max-height: 750px;
 
   gap: 5px;
-  background: #f9f9f9;
+  background: var(--bg-color);
+
+  position: relative;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 768px;
+    min-width: 300px;
+  }
 `;
 
 const HeroSection = styled(motion.section)`
@@ -24,6 +32,14 @@ const HeroSection = styled(motion.section)`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
 `;
 
 const HeroSection2 = styled(motion.section)`
@@ -34,6 +50,12 @@ const HeroSection2 = styled(motion.section)`
   align-items: center;
 
   justify-content: center;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 45%;
+    left: 20%;
+  }
 `;
 
 const Title = styled.h1`
@@ -56,6 +78,13 @@ const Hero = () => {
     visible: { opacity: 1, x: 0, transition: { duration: 1.5 } },
   };
 
+  const fadeRight = {
+    hidden: { opacity: 0, x: 100 }, // Mobile: animate from the right
+    visible: { opacity: 1, x: 0, transition: { duration: 1.5 } },
+  };
+
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <HeroContainer>
       <HeroSection initial="hidden" animate="visible" variants={fadeIn}>
@@ -69,7 +98,11 @@ const Hero = () => {
           <PlusOutlined />
         </Button>
       </HeroSection>
-      <HeroSection2 initial="hidden" animate="visible" variants={fadeLeft}>
+      <HeroSection2
+        initial="hidden"
+        animate="visible"
+        variants={isMobile ? fadeRight : fadeLeft}
+      >
         <img src={BottleCocaCola} alt="" />
       </HeroSection2>
     </HeroContainer>
