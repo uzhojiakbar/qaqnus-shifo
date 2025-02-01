@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../../assets/logo.png";
 import Button from "../generic/button/button";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import { Drawer, Menu } from "antd";
 import { motion } from "framer-motion";
+import { useLanguage } from "../../context/LanguageContext";
+import LanguageSelector from "../SelectLang";
+
+
+
 
 const Nav = styled(motion.div)`
   display: flex;
@@ -16,7 +21,10 @@ const Nav = styled(motion.div)`
   background-color: var(--bg-color);
   color: #000;
   user-select: none;
-
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  max-width: 1920px;
   @media (max-width: 768px) {
     padding: 10px;
   }
@@ -33,7 +41,6 @@ const NavLinks = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
-
   transition: all 0.2s;
 
   .link {
@@ -42,6 +49,8 @@ const NavLinks = styled.div`
     font-size: 18px;
     user-select: none;
     font-weight: 600;
+    text-decoration: none;
+    color: inherit;
 
     &:hover {
       color: var(--main-color);
@@ -49,6 +58,7 @@ const NavLinks = styled.div`
 
     &.active {
       color: var(--main-color);
+      border-bottom: 2px solid var(--main-color);
     }
   }
 
@@ -61,30 +71,31 @@ const BurgerIcon = styled(MenuOutlined)`
   font-size: 24px;
   cursor: pointer;
   display: none;
-
   @media (max-width: 768px) {
     display: block;
   }
 `;
 
-const ManuItem = styled(Menu.Item)`
-  &.ant-menu-item-selected {
-    background-color: var(--main-color) !important;
+const MobileMenu = styled(Menu)`
+  border: none;
+  width: 100%;
+  background: var(--bg-color);
+  .ant-menu-item-selected {
+    background-color: transparent !important;
     font-weight: bold;
     color: var(--main-color) !important;
+    border-bottom: 2px solid var(--main-color);
   }
 `;
+const Labels = styled.label`
+  color: black;
+  `
 
 const Navbar = () => {
-  const nav = useNavigate();
+  const { translate } = useLanguage()
+  
   const location = useLocation();
   const [visible, setVisible] = useState(false);
-
-  const MainLogo = () => {
-    if (location.pathname !== "/") {
-      nav("/");
-    }
-  };
 
   const showDrawer = () => {
     setVisible(true);
@@ -98,38 +109,34 @@ const Navbar = () => {
     hidden: { opacity: 0, y: -50 },
     visible: { opacity: 1, y: 0, transition: { duration: 1 } },
   };
+  const isActive = (hash) => location.hash === hash;
+ 
+
 
   return (
     <Nav initial="hidden" animate="visible" variants={fadeIn}>
-      <Logo onClick={MainLogo} src={logo} />
+      <Logo src={logo} />
       <NavLinks>
-        <div
-          className={`link ${location.pathname === "/" ? "active" : ""}`}
-          onClick={() => nav("/")}
+        <a
+          href="#home"
+          className={`link ${location.pathname === "/" && !location.hash ? "active" : ""}`}
         >
-          Home
-        </div>
-        <div
-          className={`link ${location.pathname === "/pages" ? "active" : ""}`}
-          onClick={() => nav("/pages")}
-        >
-          Pages
-        </div>
-        <div
-          className={`link ${
-            location.pathname === "/services" ? "active" : ""
-          }`}
-          onClick={() => nav("/services")}
-        >
-          Services
-        </div>
-        <div
-          className={`link ${location.pathname === "/contact" ? "active" : ""}`}
-          onClick={() => nav("/contact")}
-        >
-          Contact Us
-        </div>
-        <Button>Buy a drug</Button>
+          {translate('navbardata')}
+        </a>
+        <a href="#Product" className={`link ${isActive("#Product") ? "active" : ""}`}>
+          {translate('product')}
+        </a>
+        <a href="#ingredients" className={`link ${isActive("#ingredients") ? "active" : ""}`}>
+
+          {translate('Ingredients')}
+        </a>
+        <a href="#contact" className={`link ${isActive("#contact") ? "active" : ""}`}>
+          {translate('contact')}
+        </a>
+
+        <LanguageSelector />
+
+        <Button href={'#form'}>{translate('get')}</Button>
       </NavLinks>
       <BurgerIcon onClick={showDrawer} />
       <Drawer
@@ -139,28 +146,26 @@ const Navbar = () => {
         open={visible}
         style={{ width: "100%", background: "var(--bg-color)" }}
       >
-        <Menu
-          style={{
-            border: "none",
-            width: "100%",
-            background: "var(--bg-color)",
-          }}
-          onClick={closeDrawer}
-          selectedKeys={[location.pathname]}
-        >
-          <ManuItem key="/" onClick={() => nav("/")}>
-            Home
-          </ManuItem>
-          <ManuItem key="/pages" onClick={() => nav("/pages")}>
-            Pages
-          </ManuItem>
-          <ManuItem key="/services" onClick={() => nav("/services")}>
-            Services
-          </ManuItem>
-          <ManuItem key="/contact" onClick={() => nav("/contact")}>
-            Contact Us
-          </ManuItem>
-        </Menu>
+        <MobileMenu selectedKeys={[location.hash]} onClick={closeDrawer}>
+          <Menu.Item
+            key="#home"
+            className={location.pathname === "/" && !location.hash ? "ant-menu-item-selected" : ""}
+          >
+            <a href="#home">Home</a>
+          </Menu.Item>
+          <Menu.Item key="#Product" className={isActive("#Product") ? "ant-menu-item-selected" : ""}>
+            <a href="#Product">Product</a>
+          </Menu.Item>
+          <Menu.Item key="#ingredients" className={isActive("#ingredients") ? "ant-menu-item-selected" : ""}>
+            <a href="#ingredients">Ingredients</a>
+          </Menu.Item>
+          <Menu.Item key="#contact" className={isActive("#contact") ? "ant-menu-item-selected" : ""}>
+            <a href="#contact">Contact Us</a>
+          </Menu.Item>
+        </MobileMenu>
+        <Button href={'#form'} mobile={100}>Bug a Drug</Button>
+        <LanguageSelector />
+
       </Drawer>
     </Nav>
   );
