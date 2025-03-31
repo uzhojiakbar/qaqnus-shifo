@@ -125,23 +125,36 @@ const Form = () => {
     }\n*📞 Telefon 2:* ${formData.phone2 || "Yo‘q"}`;
 
     const token = "7912047402:AAGhnk6BzECdQGINEoRp6GivkB7ZLOq1aR8"; // Bot token
-    const chatId = "2017025737";
-    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(
+    const chatId = "2017025737"; // Birinchi odam
+    const chatId2 = "747112917"; // Ikkinchi odam
+
+    const url1 = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(
+      message
+    )}&parse_mode=Markdown`;
+    const url2 = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId2}&text=${encodeURIComponent(
       message
     )}&parse_mode=Markdown`;
 
-    fetch(url)
+    // Birinchi chat ID ga yuborish
+    fetch(url1)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Birinchi chatga yuborishda xatolik");
+        }
+        // Ikkinchi chat ID ga yuborish
+        return fetch(url2);
+      })
       .then((response) => {
         if (response.ok) {
           alert("Murojaatingiz yuborildi!");
           setFormData({ name: "", phone1: "", phone2: "" }); // Formani tozalash
         } else {
-          alert("Xatolik yuz berdi, qayta urinib ko‘ring.");
+          alert("Qisman yuborildi.");
         }
       })
       .catch((error) => {
         console.error("Xatolik:", error);
-        alert("Xatolik yuz berdi.");
+        alert("Xatolik yuz berdi, qayta urinib ko‘ring.");
       });
   };
 

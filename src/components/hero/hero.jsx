@@ -47,15 +47,15 @@ const HeroSection2 = styled(motion.section)`
   justify-content: center;
 
   img {
-    width: 80%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 450px;
   }
 
   @media (max-width: 768px) {
     padding: 20px;
     img {
-      width: 60%;
-      max-width: 300px;
+      width: 100%;
+      max-width: 200px;
     }
   }
 `;
