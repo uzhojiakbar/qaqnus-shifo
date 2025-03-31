@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Menu, Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
-import 'antd/dist/reset.css';
-import { useLanguage } from '../../context/LanguageContext';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Menu, Dropdown } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import "antd/dist/reset.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const FormContainer = styled.div`
   width: 100%;
@@ -106,19 +106,43 @@ const Button = styled.button`
 `;
 
 const Form = () => {
-  const [formData, setFormData] = useState({ name: '', phone1: '', phone2: '' });
+  const [formData, setFormData] = useState({
+    name: "",
+    phone1: "",
+    phone2: "",
+  });
   const { translate, setLanguage } = useLanguage();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const message = `Ism: ${formData.name}%0A📞 Telefon 1: ${formData.phone1}%0A📞 Telefon 2: ${formData.phone2 || 'Yo‘q'}`;
-    const telegramUrl = `https://t.me/share/url?url=${message}`;
-    window.open(telegramUrl, '_blank');
-    setFormData({ name: '', phone1: '', phone2: '' }); // Formani tozalash
+
+    // Xabarni Markdown formatida tayyorlash
+    const message = `*Ism:* ${formData.name}\n*📞 Telefon 1:* ${
+      formData.phone1
+    }\n*📞 Telefon 2:* ${formData.phone2 || "Yo‘q"}`;
+
+    const token = "7912047402:AAGhnk6BzECdQGINEoRp6GivkB7ZLOq1aR8"; // Bot token
+    const chatId = "2017025737";
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(
+      message
+    )}&parse_mode=Markdown`;
+
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          alert("Murojaatingiz yuborildi!");
+          setFormData({ name: "", phone1: "", phone2: "" }); // Formani tozalash
+        } else {
+          alert("Xatolik yuz berdi, qayta urinib ko‘ring.");
+        }
+      })
+      .catch((error) => {
+        console.error("Xatolik:", error);
+        alert("Xatolik yuz berdi.");
+      });
   };
 
   const handleMenuClick = (e) => {
@@ -135,15 +159,13 @@ const Form = () => {
 
   return (
     <FormContainer id="form" data-aos="flip-left">
-      <Title>{translate('contact_uss')}</Title>
-
-     
+      <Title>{translate("contact_uss")}</Title>
 
       <form onSubmit={handleSubmit}>
         <Input
           type="text"
           name="name"
-          placeholder={translate('username')}
+          placeholder={translate("username")}
           value={formData.name}
           onChange={handleChange}
           required
@@ -151,7 +173,7 @@ const Form = () => {
         <Input
           type="tel"
           name="phone1"
-          placeholder={translate('number')}
+          placeholder={translate("number")}
           value={formData.phone1}
           onChange={handleChange}
           required
@@ -159,11 +181,11 @@ const Form = () => {
         <Input
           type="tel"
           name="phone2"
-          placeholder={translate('number2')}
+          placeholder={translate("number2")}
           value={formData.phone2}
           onChange={handleChange}
         />
-        <Button type="submit">{translate('sumbit')}</Button>
+        <Button type="submit">{translate("sumbit")}</Button>
       </form>
     </FormContainer>
   );

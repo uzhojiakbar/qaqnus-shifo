@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import Button from "../generic/button/button";
 import { PlusOutlined } from "@ant-design/icons";
-import BottleCocaCola from "../../assets/bottle.png";
+import BottleCocaCola from "../../assets/logoMain.png";
 import { useLanguage } from "../../context/LanguageContext";
 
 const HeroContainer = styled.div`
@@ -96,17 +96,15 @@ const Hero = () => {
 
   const isMobile = window.innerWidth <= 768;
 
-  const {translate} = useLanguage()
+  const { translate } = useLanguage();
 
   return (
     <HeroContainer id="home">
       <HeroSection initial="hidden" animate="visible" variants={fadeIn}>
         <Title> {translate("heroTitle")}</Title>
-        <Description>
-          {translate("herodesc")}
-        </Description>
+        <Description>{translate("herodesc")}</Description>
         <Button href="#Product">
-        {translate("more")}
+          {translate("more")}
           <PlusOutlined />
         </Button>
       </HeroSection>
