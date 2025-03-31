@@ -85,6 +85,22 @@ const Input = styled.input`
   }
 `;
 
+const Textarea = styled.textarea`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  height: 150px;
+  font-size: 1rem;
+  background: #444;
+  color: #fff;
+
+  &:focus {
+    outline: 2px solid #ffffff;
+  }
+`;
+
 const Button = styled.button`
   width: 100%;
   padding: 10px;
@@ -122,7 +138,7 @@ const Form = () => {
     // Xabarni Markdown formatida tayyorlash
     const message = `*Ism:* ${formData.name}\n*📞 Telefon 1:* ${
       formData.phone1
-    }\n*📞 Telefon 2:* ${formData.phone2 || "Yo‘q"}`;
+    }\n*Murojaat💬:* ${formData.phone2 || "Yo‘q"}`;
 
     const token = "7912047402:AAGhnk6BzECdQGINEoRp6GivkB7ZLOq1aR8"; // Bot token
     const chatId = "2017025737"; // Birinchi odam
@@ -184,14 +200,14 @@ const Form = () => {
           required
         />
         <Input
-          type="tel"
+          type="number"
           name="phone1"
           placeholder={translate("number")}
           value={formData.phone1}
           onChange={handleChange}
           required
         />
-        <Input
+        <Textarea
           type="tel"
           name="phone2"
           placeholder={translate("number2")}
