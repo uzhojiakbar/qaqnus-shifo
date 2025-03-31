@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Bottle from ".././../assets/bottle.png";
 import { useLanguage } from "../../context/LanguageContext";
 
+import card1 from "../../assets/card1.png";
+
 const Container = styled.div`
   /* border: 1px solid white; */
   padding: 5px;
@@ -67,7 +69,7 @@ function Card() {
     <>
       <Container>
         <Cards data-aos="fade-right">
-          <Img src={Bottle} />
+          <Img src={card1} />
           <div>
             <Title>{translate("passkakingtitle")}</Title>
             <Description>{translate("passkaking")}</Description>

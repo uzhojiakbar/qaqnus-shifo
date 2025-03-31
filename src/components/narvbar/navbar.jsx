@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import logo from "../../assets/navlogo.png";
 import {useLocation, useNavigate} from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import { Drawer, Menu } from "antd";
 import { motion } from "framer-motion";
 import { useLanguage } from "../../context/LanguageContext";
 import LanguageSelector from "../SelectLang";
-
-
+import logo from "../../assets/navlogo.png";
 
 
 const Nav = styled(motion.div)`
