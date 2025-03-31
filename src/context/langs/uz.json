@@ -1,5 +1,5 @@
 {
-  "navbardata": "bosh sahifa",
+  "navbardata": "Bosh sahifa",
   "product": "Mahsulot",
   "Ingredients": "Tarkib",
   "contact": "Biz bilan bog'lanish",
@@ -7,7 +7,6 @@
   "heroTitle": "Fizioterapiyada standartlarni belgilash",
   "herodesc": "O'quvchi sahifaning tartibini ko'rib chiqayotganda uning o'qilishi mumkin bo'lgan mazmuni bilan chalg'itishi uzoq vaqtdan beri tasdiqlangan haqiqatdir.",
   "more": "Ko'proq o'qish",
-
   "abouttitle": "Mahsulot haqida",
   "passkakingtitle": "Qadoqlash",
   "passkaking": "Qadoqlash. Mahsulot 100 ml shisha idishlarda taqdim etiladi. Shisha idishlar mahkamlanib, termoqopqoq bilan himoyalangan va karton karobkalarga joylashtirilgan",
@@ -47,5 +46,6 @@
   "username": "Ism",
   "number": "Telefon raqamingizni kiriting",
   "number2": "Qo'shimcha telefon (ixtiyoriy)",
-  "sumbit": "Yuborish"
+  "sumbit": "Yuborish",
+  "get_product": "Buyurtma berish"
 }

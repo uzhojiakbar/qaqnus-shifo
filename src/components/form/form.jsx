@@ -101,7 +101,7 @@ const Textarea = styled.textarea`
   }
 `;
 
-const Button = styled.button`
+const Button = styled.a`
   width: 100%;
   padding: 10px;
   border: none;
@@ -112,6 +112,9 @@ const Button = styled.button`
   cursor: pointer;
   color: #2c2c2c;
   transition: background 0.3s;
+  
+  text-decoration: none;
+  text-align: center;
 
   &:hover {
     background: #ffffff;
@@ -120,6 +123,11 @@ const Button = styled.button`
     scale: 1.01;
   }
 `;
+
+const Container = styled.div`
+    width: 95%;
+    margin: 0 auto;
+`
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -186,36 +194,42 @@ const Form = () => {
     </Menu>
   );
 
+
+  return <Container id="form" >
+    <Button target={"_blank"} href={"https://docs.google.com/forms/d/e/1FAIpQLSenuVa9rsOJUXumGDtlBxfgGapLSSSznNHPlGZXo55jpeleVw/viewform?usp=header"} type="submit">{translate("get_product")}</Button>
+  </Container>
+
+
   return (
     <FormContainer id="form" data-aos="flip-left">
       <Title>{translate("contact_uss")}</Title>
 
-      <form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="name"
-          placeholder={translate("username")}
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <Input
-          type="number"
-          name="phone1"
-          placeholder={translate("number")}
-          value={formData.phone1}
-          onChange={handleChange}
-          required
-        />
-        <Textarea
-          type="tel"
-          name="phone2"
-          placeholder={translate("number2")}
-          value={formData.phone2}
-          onChange={handleChange}
-        />
+      {/*<form onSubmit={handleSubmit}>*/}
+      {/*  <Input*/}
+      {/*    type="text"*/}
+      {/*    name="name"*/}
+      {/*    placeholder={translate("username")}*/}
+      {/*    value={formData.name}*/}
+      {/*    onChange={handleChange}*/}
+      {/*    required*/}
+      {/*  />*/}
+      {/*  <Input*/}
+      {/*    type="number"*/}
+      {/*    name="phone1"*/}
+      {/*    placeholder={translate("number")}*/}
+      {/*    value={formData.phone1}*/}
+      {/*    onChange={handleChange}*/}
+      {/*    required*/}
+      {/*  />*/}
+      {/*  <Textarea*/}
+      {/*    type="tel"*/}
+      {/*    name="phone2"*/}
+      {/*    placeholder={translate("number2")}*/}
+      {/*    value={formData.phone2}*/}
+      {/*    onChange={handleChange}*/}
+      {/*  />*/}
+      {/*</form>*/}
         <Button type="submit">{translate("sumbit")}</Button>
-      </form>
     </FormContainer>
   );
 };

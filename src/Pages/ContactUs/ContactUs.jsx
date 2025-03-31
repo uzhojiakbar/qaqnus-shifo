@@ -7,11 +7,11 @@ import {
   FaBarcode,
 } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
+import Footer from "../../components/footer/footer.jsx";
 
 const ContactContainer = styled.div`
   width: 100%;
   margin: 20px auto;
-  padding: 30px;
   border-radius: 12px;
   font-family: Arial, sans-serif;
   color: #ffffff;
@@ -40,27 +40,38 @@ const InfoText = styled.p`
   font-family: sans-serif;
 `;
 
-const ContactList = styled.ul`
-  list-style-type: none;
-  padding: 0;
+const ContactList = styled.div`
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1%;
+    align-items: center;
+    gap: 20px;
+    
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
 `;
 
-const ContactItem = styled.li`
-  background: #333;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 8px;
-  color: #ffffff;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-  transition: background 0.3s ease;
+const ContactItem = styled.a`
+    background: #333;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
 
-  &:hover {
-    background: #444;
-  }
+    &:hover {
+        background: #444;
+    }
 `;
 
 const ContactUs = () => {
@@ -89,27 +100,26 @@ const ContactUs = () => {
           <strong>{translate("phone")}</strong>
         </InfoText>
       </InfoBlock>
-      <ContactList>
-        <ContactItem data-aos="zoom-in">
-          <FaPhoneAlt size={16} /> +998990800300
-        </ContactItem>
-        <ContactItem data-aos="zoom-in">
-          <FaPhoneAlt size={16} /> +998902148091
-        </ContactItem>
-        <ContactItem data-aos="zoom-in">
-          <FaPhoneAlt size={16} /> +998993953247
-        </ContactItem>
-        <ContactItem data-aos="zoom-in">
-          <FaPhoneAlt size={16} /> +998999738091
-        </ContactItem>
-      </ContactList>
 
-      <InfoBlock data-aos="zoom-in">
-        <FaBarcode size={20} />
-        <InfoText>
-          <strong>{translate("code")}</strong> TI311590883-01:2024
-        </InfoText>
-      </InfoBlock>
+
+        <ContactList>
+            <ContactItem href="tel:+998990800300" data-aos="zoom-in">
+                <FaPhoneAlt size={16} /> +998990800300
+            </ContactItem>
+            <ContactItem href="tel:+998902148091" data-aos="zoom-in">
+                <FaPhoneAlt size={16} /> +998902148091
+            </ContactItem>
+            <ContactItem href="tel:+998993953247" data-aos="zoom-in">
+                <FaPhoneAlt size={16} /> +998993953247
+            </ContactItem>
+            <ContactItem href="tel:+998999738091" data-aos="zoom-in">
+                <FaPhoneAlt size={16} /> +998999738091
+            </ContactItem>
+        </ContactList>
+        
+        <Footer />
+
+
     </ContactContainer>
   );
 };

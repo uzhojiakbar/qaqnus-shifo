@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import logo from "../../assets/logo.png";
-import Button from "../generic/button/button";
-import { useLocation } from "react-router-dom";
+import logo from "../../assets/navlogo.png";
+import {useLocation, useNavigate} from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import { Drawer, Menu } from "antd";
 import { motion } from "framer-motion";
@@ -24,7 +23,7 @@ const Nav = styled(motion.div)`
   position: fixed;
   z-index: 999;
   width: 100%;
-  max-width: 1920px;
+  max-width: 1200px;
   @media (max-width: 768px) {
     padding: 10px;
   }
@@ -36,13 +35,36 @@ const Logo = styled.img`
   cursor: pointer;
 `;
 
+
+const Button = styled.a`
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #77704c;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #2c2c2c;
+  transition: background 0.3s;
+  
+  text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    background: #ffffff;
+  }
+  &:active {
+    scale: 1.01;
+  }
+`;
+
+
 const NavLinks = styled.div`
   list-style: none;
   display: flex;
   align-items: center;
   gap: 15px;
   transition: all 0.2s;
-
   .link {
     transition: all 0.2s;
     cursor: pointer;
@@ -93,6 +115,8 @@ const Labels = styled.label`
 
 const Navbar = () => {
   const { translate } = useLanguage()
+
+  const nav = useNavigate()
   
   const location = useLocation();
   const [visible, setVisible] = useState(false);
@@ -109,13 +133,14 @@ const Navbar = () => {
     hidden: { opacity: 0, y: -50 },
     visible: { opacity: 1, y: 0, transition: { duration: 1 } },
   };
+
   const isActive = (hash) => location.hash === hash;
  
 
 
   return (
     <Nav initial="hidden" animate="visible" variants={fadeIn}>
-      <Logo src={logo} />
+      <Logo onClick={()=>nav("#home")} src={logo} />
       <NavLinks>
         <a
           href="#home"
@@ -136,7 +161,7 @@ const Navbar = () => {
 
         <LanguageSelector />
 
-        <Button href={'#form'}>{translate('get')}</Button>
+        <Button target={"_blank"} href={"https://docs.google.com/forms/d/e/1FAIpQLSenuVa9rsOJUXumGDtlBxfgGapLSSSznNHPlGZXo55jpeleVw/viewform?usp=header"} type="submit">{translate("get_product")}</Button>
       </NavLinks>
       <BurgerIcon onClick={showDrawer} />
       <Drawer

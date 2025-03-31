@@ -27,7 +27,6 @@ const Root = () => {
       <Ingredients />
       <Form />
       <ContactUs />
-      <Footer />
     </div>
   );
 };
