@@ -4,6 +4,9 @@ import Bottle from ".././../assets/bottle.png";
 import { useLanguage } from "../../context/LanguageContext";
 
 import card1 from "../../assets/card1.png";
+import card2 from "../../assets/icon2.png";
+import card3 from "../../assets/icon3.png";
+import card4 from "../../assets/icon4.png";
 
 const Container = styled.div`
   /* border: 1px solid white; */
@@ -21,7 +24,6 @@ const Container = styled.div`
 `;
 const Cards = styled.div`
   /* border: 1px solid white; */
-  padding: 10px;
   background: #333131;
   border-radius: 10px;
   display: flex;
@@ -29,6 +31,10 @@ const Cards = styled.div`
   &:hover {
     background: #424242;
   }
+  
+  display: flex;
+  align-items: center;
+  gap: 20px;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -58,7 +64,7 @@ const Description = styled.p`
 `;
 
 const Img = styled.img`
-  width: 200px;
+  width: 50%;
   @media (max-width: 600px) {
     width: 160px;
   }
@@ -69,21 +75,21 @@ function Card() {
     <>
       <Container>
         <Cards data-aos="fade-right">
-          <Img src={card1} />
+          <Img className={"img"}  src={card1} />
           <div>
             <Title>{translate("passkakingtitle")}</Title>
             <Description>{translate("passkaking")}</Description>
           </div>
         </Cards>
         <Cards data-aos="fade-left">
-          <Img src={Bottle} />
+          <Img className={"img"}  src={card2} />
           <div>
             <Title>{translate("sphere")}</Title>
             <Description>{translate("covid")}</Description>
           </div>
         </Cards>
         <Cards data-aos="fade-right" data-aos-duration="700">
-          <Img src={Bottle} />
+          <Img className={"img"}  src={card3} />
           <div>
             <Title>{translate("method")}</Title>
             <Description>{translate("methodD")}</Description>
@@ -91,7 +97,7 @@ function Card() {
         </Cards>
 
         <Cards data-aos="fade-left" data-aos-duration="700">
-          <Img src={Bottle} />
+          <Img className={"img"}  src={card4} />
           <div>
             <Title>{translate("save")}</Title>
             <Description>{translate("saveD")}</Description>

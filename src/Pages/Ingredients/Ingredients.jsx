@@ -36,7 +36,6 @@ const SectionWrapper = styled.div`
 
 const SectionHalf = styled.div`
   flex: 1;
-  min-width: 300px;
 `;
 
 const SectionFull = styled.div`
@@ -66,6 +65,7 @@ const ListItem = styled.li`
   color: #E3E3E3;
   font-weight: bold;
   transition: background 0.3s ease;
+  word-wrap: anywhere;
 
   &:hover {
     background: #555;
